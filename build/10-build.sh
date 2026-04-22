@@ -49,6 +49,17 @@ echo "::group:: Install Packages"
 # Example using COPR with isolated pattern:
 # copr_install_isolated "ublue-os/staging" package-name
 
+# Add the Terra repo
+dnf install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+# Install Ghostty
+dnf install -y ghostty
+
+# Get the repo config (for Fedora 41, which Aurora is currently based on)
+dnf install -y https://repo.protonvpn.com/fedora-$(rpm -E %fedora)-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.1-2.noarch.rpm
+# Update and install
+dnf check-update
+dnf install -y proton-vpn-gnome-desktop proton-vpn-cli
+
 echo "::endgroup::"
 
 echo "::group:: System Configuration"
