@@ -52,6 +52,7 @@ echo "::group:: Install Packages"
 # Add the Terra repo
 dnf install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 # Install Ghostty
+mkdir -p /usr/local/bin
 cat <<EOF > /usr/local/bin/systemctl
 #!/bin/bash
 echo "Mock systemctl: ignoring command \$@"
