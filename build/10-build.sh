@@ -52,14 +52,14 @@ echo "::group:: Install Packages"
 # Add the Terra repo
 dnf install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 # Install Ghostty
-dnf install -y ghostty
+dnf install -y ghostty zed
 
 # Get the repo config (for Fedora 41, which Aurora is currently based on)
-dnf install -y https://repo.protonvpn.com/fedora-$(rpm -E %fedora)-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.1-2.noarch.rpm
+dnf install -y https://repo.protonvpn.com/fedora-$(rpm -E %fedora)-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.3-1.noarch.rpm
 # Update and install
 dnf check-update
 dnf install -y proton-vpn-gnome-desktop proton-vpn-cli
-
+dnf clean all
 echo "::endgroup::"
 
 echo "::group:: System Configuration"
