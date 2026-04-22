@@ -58,7 +58,7 @@ dnf install -y ghostty zed
 dnf install -y https://repo.protonvpn.com/fedora-$(rpm -E %fedora)-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.3-1.noarch.rpm
 # Update and install
 dnf check-update
-dnf install -y proton-vpn-gnome-desktop proton-vpn-cli
+dnf install -y proton-vpn-gnome-desktop protonvpn-cli
 dnf clean all
 echo "::endgroup::"
 
