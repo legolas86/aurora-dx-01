@@ -52,14 +52,15 @@ echo "::group:: Install Packages"
 # Add the Terra repo
 dnf install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 # Install Ghostty
-MOCK_BIN_DIR=$(mktemp -d)
-cat <<EOF > "$MOCK_BIN_DIR/systemctl"
+mv /usr/bin/systemctl /usr/bin/systemctl.bak
+
+cat <<EOF > /usr/bin/systemctl
 #!/bin/bash
 echo "Mock systemctl: suppressing command \$@"
 exit 0
 EOF
-chmod +x "$MOCK_BIN_DIR/systemctl"
-export PATH="$MOCK_BIN_DIR:$PATH"
+
+chmod +x /usr/bin/systemctl
 
 dnf install -y ghostty zed #protonvpn-cli
 
@@ -68,6 +69,7 @@ dnf install -y https://repo.protonvpn.com/fedora-$(rpm -E %fedora)-stable/proton
 # Update and install
 #dnf check-update
 dnf install -y proton-vpn-gnome-desktop protonvpn-cli
+mv /usr/bin/systemctl.bak /usr/bin/systemctl
 dnf clean all
 echo "::endgroup::"
 
